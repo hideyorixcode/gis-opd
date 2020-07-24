@@ -66,7 +66,7 @@ class BaseController extends Controller
             'keyword_web' => getSetting("keyword"),
             'email_web' => getSetting("email"),
             'notelepon_web' => getSetting("notelepon"),
-            'nama_unker_app' => getSetting("nama_unker_app"),
+            'nama_app' => getSetting("nama_app"),
             'alamat_web' => getSetting("alamat"),
             'author' => getSetting("author"),
             'area' => getSetting("area")
