@@ -124,7 +124,7 @@
         var data_token = {<?= csrf_token() ?>:
         token
     }
-        ;
+
         Swal.fire({
             title: 'Apakah anda ingin menghapus data ini',
             text: "Data yang anda hapus, tidak akan kembali",
