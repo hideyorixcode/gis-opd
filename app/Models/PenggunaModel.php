@@ -143,6 +143,32 @@ class PenggunaModel extends Model
         return $this->dt->countAllResults();
     }
 
+    public function count_all_uptd_aja($id_unker)
+    {
+        //   $tbl_storage = $this->db->table($this->table);
+        if($id_unker!='')
+        {
+            $this->dt->groupStart();
+            $this->dt->like('id_unker', $id_unker);
+            $this->dt->groupEnd();
+        }
+        $this->dt->where('status', 'UPTD');
+        return $this->dt->countAllResults();
+    }
+
+    public function count_all_cabdin_aja($id_unker)
+    {
+        //   $tbl_storage = $this->db->table($this->table);
+        if($id_unker!='')
+        {
+            $this->dt->groupStart();
+            $this->dt->like('id_unker', $id_unker);
+            $this->dt->groupEnd();
+        }
+        $this->dt->where('status', 'CABDIN');
+        return $this->dt->countAllResults();
+    }
+
     function get_datatables_uptd()
     {
         $this->_get_datatables_query_uptd();
