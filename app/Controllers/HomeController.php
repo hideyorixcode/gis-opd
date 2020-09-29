@@ -45,6 +45,7 @@ class HomeController extends BaseController
             'jumlahOPD' => $jumlahOPD,
             'jumlahUPTD' => $this->mpengguna->count_all_uptd_aja($id_unker),
             'jumlahCABDIN' => $this->mpengguna->count_all_cabdin_aja($id_unker),
+            'jumlahGEDUNG' => $this->mpengguna->count_all_gedung_aja($id_unker),
             'dataMaps' => $dataMaps,
         ];
         $data = array_merge($this->dataGlobal, $this->dataController, $data);
@@ -87,6 +88,7 @@ class HomeController extends BaseController
             'jumlahOPD' => $jumlahOPD,
             'jumlahUPTD' => $this->mpengguna->count_all_uptd_aja($id_unker),
             'jumlahCABDIN' => $this->mpengguna->count_all_cabdin_aja($id_unker),
+            'jumlahGEDUNG' => $this->mpengguna->count_all_gedung_aja($id_unker),
             'dataMaps' => $dataMaps,
         ];
         $data = array_merge($this->dataGlobal, $this->dataController, $data);

@@ -52,9 +52,7 @@ class PenggunaModel extends Model
         if ($kabkota != "") {
             if ($kabkota == "all") {
 
-            }
-            else
-            {
+            } else {
                 $this->dt->groupStart();
                 $this->dt->like('alamat', $kabkota);
                 $this->dt->groupEnd();
@@ -90,7 +88,7 @@ class PenggunaModel extends Model
         $this->_get_datatables_query_opd();
         return $this->dt->countAllResults();
     }
-    
+
     public function count_all_opd_aja()
     {
         //   $tbl_storage = $this->db->table($this->table);
@@ -106,9 +104,7 @@ class PenggunaModel extends Model
         if ($kabkota != "") {
             if ($kabkota == "all") {
 
-            }
-            else
-            {
+            } else {
                 $this->dt->groupStart();
                 $this->dt->like('alamat', $kabkota);
                 $this->dt->groupEnd();
@@ -143,31 +139,18 @@ class PenggunaModel extends Model
         return $this->dt->countAllResults();
     }
 
-    public function count_all_uptd_aja($id_unker)
+    public function count_all_gedung_aja($id_unker)
     {
         //   $tbl_storage = $this->db->table($this->table);
-        if($id_unker!='')
-        {
+        if ($id_unker != '') {
             $this->dt->groupStart();
             $this->dt->like('id_unker', $id_unker);
             $this->dt->groupEnd();
         }
-        $this->dt->where('status', 'UPTD');
+        $this->dt->where('status', 'GEDUNG');
         return $this->dt->countAllResults();
     }
 
-    public function count_all_cabdin_aja($id_unker)
-    {
-        //   $tbl_storage = $this->db->table($this->table);
-        if($id_unker!='')
-        {
-            $this->dt->groupStart();
-            $this->dt->like('id_unker', $id_unker);
-            $this->dt->groupEnd();
-        }
-        $this->dt->where('status', 'CABDIN');
-        return $this->dt->countAllResults();
-    }
 
     function get_datatables_uptd()
     {
@@ -180,7 +163,7 @@ class PenggunaModel extends Model
 
     private function _get_datatables_query_uptd()
     {
-        $whereIn = ['UPTD', 'CABDIN'];
+        $whereIn = ['UPTD', 'CABDIN', 'GEDUNG'];
         $this->dt->whereIn('status', $whereIn);
 
         $statusPost = $this->request->getPost('statusPost');
@@ -198,9 +181,7 @@ class PenggunaModel extends Model
         if ($kabkota != "") {
             if ($kabkota == "all") {
 
-            }
-            else
-            {
+            } else {
                 $this->dt->groupStart();
                 $this->dt->like('alamat', $kabkota);
                 $this->dt->groupEnd();
@@ -241,7 +222,7 @@ class PenggunaModel extends Model
     public function count_all_uptd()
     {
         //   $tbl_storage = $this->db->table($this->table);
-        $whereIn = ['UPTD', 'CABDIN'];
+        $whereIn = ['UPTD', 'CABDIN', 'GEDUNG'];
         $this->dt->whereIn('status', $whereIn);
         $statusPost = $this->request->getPost('statusPost');
         if ($statusPost != "") {
@@ -257,9 +238,7 @@ class PenggunaModel extends Model
         if ($kabkota != "") {
             if ($kabkota == "all") {
 
-            }
-            else
-            {
+            } else {
                 $this->dt->groupStart();
                 $this->dt->like('alamat', $kabkota);
                 $this->dt->groupEnd();
@@ -281,7 +260,7 @@ class PenggunaModel extends Model
 
     private function _get_datatables_query_rekap()
     {
-        $whereIn = ['UPTD', 'CABDIN', 'OPD'];
+        $whereIn = ['UPTD', 'CABDIN', 'GEDUNG', 'OPD'];
         $this->dt->whereIn('status', $whereIn);
 
         $statusPost = $this->request->getPost('statusPost');
@@ -294,9 +273,7 @@ class PenggunaModel extends Model
         if ($kabkota != "") {
             if ($kabkota == "all") {
 
-            }
-            else
-            {
+            } else {
                 $this->dt->groupStart();
                 $this->dt->like('alamat', $kabkota);
                 $this->dt->groupEnd();
@@ -337,7 +314,7 @@ class PenggunaModel extends Model
     public function count_all_rekap()
     {
         //   $tbl_storage = $this->db->table($this->table);
-        $whereIn = ['UPTD', 'CABDIN', 'OPD'];
+        $whereIn = ['UPTD', 'CABDIN', 'GEDUNG', 'OPD'];
         $this->dt->whereIn('status', $whereIn);
         $statusPost = $this->request->getPost('statusPost');
         if ($statusPost != "") {
@@ -348,9 +325,7 @@ class PenggunaModel extends Model
         if ($kabkota != "") {
             if ($kabkota == "all") {
 
-            }
-            else
-            {
+            } else {
                 $this->dt->groupStart();
                 $this->dt->like('alamat', $kabkota);
                 $this->dt->groupEnd();

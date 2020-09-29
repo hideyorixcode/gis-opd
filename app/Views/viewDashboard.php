@@ -103,6 +103,8 @@ $hari_ini = $hr . ", " . $tgl . " " . $bln . " " . $thn;
                                     <option value="CABDIN" <?= $getstatus == 'CABDIN' ? 'selected' : '' ?>>Cabang
                                         Dinas
                                     </option>
+                                    <option value="GEDUNG" <?= $getstatus == 'GEDUNG' ? 'selected' : '' ?>>Gedung / Aset
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -133,7 +135,7 @@ $hari_ini = $hr . ", " . $tgl . " " . $bln . " " . $thn;
                                 <div class="col-6">
                                     <div class="text-right">
                                         <h3 class="text-dark mt-1" id="clock"><span data-plugin="counterup"></span></h3>
-                                        <p class="text-muted mb-1 text-truncate"><?= $hello  ?></p>
+                                        <p class="text-muted mb-1 text-truncate"><?= $hello ?></p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -156,7 +158,7 @@ $hari_ini = $hr . ", " . $tgl . " " . $bln . " " . $thn;
                                             <?php } else { ?>
                                                 <span><?= $jumlahOPD ?></span>
                                             <?php } ?>
-                                        
+
                                         </h3>
                                         <p class="text-muted mb-1 text-truncate"><?= $mode; ?></p>
                                     </div>
@@ -165,7 +167,7 @@ $hari_ini = $hr . ", " . $tgl . " " . $bln . " " . $thn;
                         </div> <!-- end widget-rounded-circle-->
                     </div> <!-- end col-->
 
-                    <div class="col-md-12 col-xl-6">
+                    <div class="col-md-12 col-xl-4">
                         <div class="widget-rounded-circle card-box">
                             <div class="row">
                                 <div class="col-6">
@@ -184,7 +186,7 @@ $hari_ini = $hr . ", " . $tgl . " " . $bln . " " . $thn;
                         </div> <!-- end widget-rounded-circle-->
                     </div> <!-- end col-->
 
-                    <div class="col-md-12 col-xl-6">
+                    <div class="col-md-12 col-xl-4">
                         <div class="widget-rounded-circle card-box">
                             <div class="row">
                                 <div class="col-6">
@@ -197,6 +199,25 @@ $hari_ini = $hr . ", " . $tgl . " " . $bln . " " . $thn;
                                         <h3 class="text-dark mt-1"><span
                                                     data-plugin="counterup"><?= $jumlahCABDIN ?></span></h3>
                                         <p class="text-muted mb-1 text-truncate">Total Cabang Dinas</p>
+                                    </div>
+                                </div>
+                            </div> <!-- end row-->
+                        </div> <!-- end widget-rounded-circle-->
+                    </div> <!-- end col-->
+
+                    <div class="col-md-12 col-xl-4">
+                        <div class="widget-rounded-circle card-box">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-primary border-info border shadow">
+                                        <i class="mdi mdi-home font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-right">
+                                        <h3 class="text-dark mt-1"><span
+                                                    data-plugin="counterup"><?= $jumlahGEDUNG ?></span></h3>
+                                        <p class="text-muted mb-1 text-truncate">Total Gedung/Aset</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -255,23 +276,22 @@ $hari_ini = $hr . ", " . $tgl . " " . $bln . " " . $thn;
 
         function initialize() {
             var noPoi = [
-            {
-                featureType: "poi",
-                stylers: [
-                  { visibility: "off" }
-                ]   
-            }
+                {
+                    featureType: "poi",
+                    stylers: [
+                        {visibility: "off"}
+                    ]
+                }
             ];
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: -5.433416599999999, lng: 105.25733930000001},
                 clickableIcons: false,
-               // disableDefaultUI: true,
+                // disableDefaultUI: true,
                 zoom: 10
             });
-            
-             map.setOptions({styles: noPoi});
-            
-            
+
+            map.setOptions({styles: noPoi});
+
 
             var data =  <?php echo json_encode($dataMaps)?>;
             //console.log(data);
@@ -283,33 +303,33 @@ $hari_ini = $hr . ", " . $tgl . " " . $bln . " " . $thn;
 
                 if (v.status == "UPTD") {
                     var has_string = $('*:contains("SAMSAT KELILING")').length;
-                   // alert(has_string);
-                   var str = v.nama_unker; 
+                    // alert(has_string);
+                    var str = v.nama_unker;
                     var n = str.search("SAMSAT KELILING");
-                    if(n)
-                    {
+                    if (n) {
                         url_icon = '<?=base_url('public/uploads/uptd.png')?>';
-                         
+
+                    } else {
+                        url_icon = '<?=base_url('public/uploads/car.png')?>';
                     }
-                    else
-                    {
-                    url_icon = '<?=base_url('public/uploads/car.png')?>';
-                    }
-                    urlText = '<?=base_url('info/uptd-cabdin/')?>/'+v.id_unker;
+                    urlText = '<?=base_url('info/uptd-cabdin/')?>/' + v.id_unker;
                 } else if (v.status == "CABDIN") {
                     url_icon = '<?=base_url('public/uploads/cabdin.png')?>';
-                    urlText = '<?=base_url('info/uptd-cabdin/')?>/'+v.id_unker;
+                    urlText = '<?=base_url('info/uptd-cabdin/')?>/' + v.id_unker;
+                } else if (v.status == "GEDUNG") {
+                    url_icon = '<?=base_url('public/uploads/gedung.png')?>';
+                    urlText = '<?=base_url('info/uptd-cabdin/')?>/' + v.id_unker;
                 } else {
                     url_icon = '<?=base_url('public/uploads/opd.png')?>';
-                    urlText = '<?=base_url('info/opd/')?>/'+v.id_unker;
+                    urlText = '<?=base_url('info/opd/')?>/' + v.id_unker;
                 }
 
-                var contentString = '<h3>' + v.nama_unker + ' ('+v.status+')</h3><br/><span>' + v.alamat + '</span>' +
-                    '<p align="center"><br/><a href="'+urlText+'" class="link_detail btn btn-primary" target="_blank">Lihat Detail</a></p>';
+                var contentString = '<h3>' + v.nama_unker + ' (' + v.status + ')</h3><br/><span>' + v.alamat + '</span>' +
+                    '<p align="center"><br/><a href="' + urlText + '" class="link_detail btn btn-primary" target="_blank">Lihat Detail</a></p>';
                 var infowindow = new google.maps.InfoWindow({
                     content: contentString
                 });
-                
+
                 var marker = new google.maps.Marker({
                     position: pos,
                     map: map,

@@ -31,7 +31,7 @@
                     <!--                    <div class="text-right mb-4">-->
                     <!--                        <a class="btn btn-primary waves-effect waves-light text-white"-->
                     <!--                           href="--><? //= base_url('dashboard/uptd-cabdin/form') ?><!--">-->
-                    <!--                            <i class="mdi mdi-plus-box-multiple"></i> Tambah UPTD / CABDIN-->
+                    <!--                            <i class="mdi mdi-plus-box-multiple"></i> Tambah UPTD / CABDIN / GEDUNG-->
                     <!--                        </a>-->
                     <!--                    </div>-->
                 </div>
@@ -62,6 +62,7 @@
                                     <option value="">Seluruh Status</option>
                                     <option value="UPTD">UPTD</option>
                                     <option value="CABDIN">Cabang Dinas</option>
+                                    <option value="GEDUNG">Gedung/Aset</option>
                                 </select>
                             </div>
                         </div>
@@ -122,7 +123,7 @@
                             <thead>
                             <tr>
                                 <th class="all">#</th>
-                                <th class="all">Nama UPTD / CABDIN</th>
+                                <th class="all">Nama UPTD / CABDIN / GEDUNG</th>
                                 <th class="none">Username</th>
                                 <th>Nama Pejabat</th>
                                 <th>Alamat</th>

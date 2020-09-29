@@ -58,7 +58,7 @@
         <div class="row">
             <div class="col-lg-12 col-xl-12">
                 <div class="card-box">
-                    <h4 class="header-title m-t-0">Form Ubah Data UPTD / CABDIN</h4>
+                    <h4 class="header-title m-t-0">Form Ubah Data UPTD / CABDIN / GEDUNG</h4>
                     <p class="text-muted font-14 m-b-20">
                         Silahkan lengkapi data berikut ini, tanda <span class="text-danger">*</span> wajib diisi
                     </p>
@@ -111,7 +111,7 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label id="label_nama">Nama UPTD / CABDIN <span class="text-danger">*</span></label>
+                                    <label id="label_nama">Nama UPTD / CABDIN / GEDUNG <span class="text-danger">*</span></label>
                                     <input type="text"
                                            class="form-control <?= ($validation->hasError('nama_unker')) ? 'is-invalid' : '' ?>"
                                            id="nama_unker" name="nama_unker" placeholder="Nama uptd" required
@@ -123,7 +123,7 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label id="label_singkatan">Singkatan UPTD / CABDIN <span
+                                    <label id="label_singkatan">Singkatan UPTD / CABDIN / GEDUNG <span
                                                 class="text-danger">*</span></label>
                                     <input type="text"
                                            class="form-control <?= ($validation->hasError('singkatan_unker')) ? 'is-invalid' : '' ?>"
@@ -213,7 +213,7 @@
                             <div class="col-lg-4">
 
                                 <div class="form-group mb-3">
-                                    <label id="label_id">ID UPTD / CABDIN <span class="text-danger">*</span></label>
+                                    <label id="label_id">ID UPTD / CABDIN / GEDUNG <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <input type="hidden" id="inputIDOPD_" name="inputIDOPD_" value="">
@@ -221,7 +221,7 @@
                                         </div>
                                         <input type="text"
                                                class="form-control <?= ($validation->hasError('id_unker_mix')) ? 'is-invalid' : '' ?>"
-                                               id="id_unker" name="id_unker" placeholder="ID unik untuk UPTD / CABDIN"
+                                               id="id_unker" name="id_unker" placeholder="ID unik untuk UPTD / CABDIN / GEDUNG"
                                                aria-describedby="inputGroupPrepend" required
                                                onkeypress="return check_int(event)"
                                                maxlength="4"

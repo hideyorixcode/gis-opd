@@ -58,7 +58,7 @@
         <div class="row">
             <div class="col-lg-12 col-xl-12">
                 <div class="card-box">
-                    <h4 class="header-title m-t-0">Form Tambah UPTD / CABDIN</h4>
+                    <h4 class="header-title m-t-0">Form Tambah UPTD / CABDIN / GEDUNG</h4>
                     <p class="text-muted font-14 m-b-20">
                         Silahkan lengkapi data berikut ini, tanda <span class="text-danger">*</span> wajib diisi
                     </p>
@@ -91,6 +91,9 @@
                                         <option value="CABDIN" <?= old('statusSelect') == 'CABDIN' ? 'selected' : '' ?>>
                                             Cabang Dinas
                                         </option>
+                                        <option value="GEDUNG" <?= old('statusSelect') == 'GEDUNG' ? 'selected' : '' ?>>
+                                            Gedung / Aset
+                                        </option>
                                     </select>
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('statusSelect'); ?>
@@ -98,7 +101,7 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label id="label_nama">Nama UPTD / CABDIN <span class="text-danger">*</span></label>
+                                    <label id="label_nama">Nama UPTD / CABDIN / GEDUNG <span class="text-danger">*</span></label>
                                     <input type="text"
                                            class="form-control <?= ($validation->hasError('nama_unker')) ? 'is-invalid' : '' ?>"
                                            id="nama_unker" name="nama_unker" placeholder="Nama uptd" required
@@ -110,7 +113,7 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label id="label_singkatan">Singkatan UPTD / CABDIN </label>
+                                    <label id="label_singkatan">Singkatan UPTD / CABDIN / GEDUNG </label>
                                     <input type="text"
                                            class="form-control <?= ($validation->hasError('singkatan_unker')) ? 'is-invalid' : '' ?>"
                                            id="singkatan_unker" name="singkatan_unker"

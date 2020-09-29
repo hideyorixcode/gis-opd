@@ -43,6 +43,7 @@
                                     <option value="OPD">OPD</option>
                                     <option value="UPTD">UPTD</option>
                                     <option value="CABDIN">Cabang Dinas</option>
+                                    <option value="GEDUNG">Gedung/Aset</option>
                                 </select>
                             </div>
                         </div>
