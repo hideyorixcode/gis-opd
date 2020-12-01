@@ -6,6 +6,8 @@
       type="text/css"/>
 <link href="<?= base_url('public/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') ?>"
       rel="stylesheet" type="text/css"/>
+<link href="<?= base_url('public/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') ?>"
+      rel="stylesheet" type="text/css"/>
 <!-- third party css end -->
 <?= $this->endSection(); ?><!-- end css -->
 <?= $this->section('content'); ?>
@@ -34,14 +36,23 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-4 col-form-label">Kabupaten/Kota</label>
-                            <div class="col-7">
+                            <label class="col-3 col-form-label">Kabupaten/Kota</label>
+                            <div class="col-5">
                                 <input type="text" class="form-control" name="kabupaten_kota" id="kabupaten_kota"
                                        readonly value="<?= ($kab_kota); ?>">
                             </div>
-                            <a href="javascript:window.print()"
-                               class="btn btn-primary waves-effect waves-light d-print-none"><i
-                                        class="mdi mdi-printer mr-1"></i> Print</a>
+                            <div class="col-4 d-print-none">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <a href="javascript:window.print()"
+                                           class="btn btn-primary waves-effect waves-light"><i
+                                                    class="mdi mdi-printer mr-1"></i> Print</a>
+                                    </div>
+                                    <div id="buttons_cetak" class="col-9"></div>
+                                </div>
+
+
+                            </div>
                         </div>
 
 
@@ -87,6 +98,15 @@
 <script src="<?= base_url('public/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
 <script src="<?= base_url('public/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') ?>"></script>
 <script src="<?= base_url('public/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/libs/datatables.net-buttons/js/buttons.flash.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/libs/datatables.net-buttons/js/buttons.print.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/libs/datatables.net-buttons/js/buttons.html5.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
 
 <!-- third party js ends -->
 <script>
@@ -101,7 +121,6 @@
             {
                 "processing": true,
                 "serverSide": true,
-                "pageLength": 25,
                 fixedHeader: true,
                 responsive: true,
                 "ordering": false,
@@ -110,6 +129,10 @@
                 "paging": false,
                 "info": false,
                 "pageLength": -1,
+                // dom: 'Bfrtip',
+                // buttons: [
+                //     'copy', 'excel', 'pdf'
+                // ],
                 // "aLengthMenu": [
                 //     [10, 25, 50, 100, -1],
                 //     [10, 25, 50, 100, "Semua"]
@@ -165,10 +188,26 @@
                 },
             });
 
+        var buttons = new $.fn.dataTable.Buttons(table, {
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: 'Ekspor Excel',
+                    title: 'Perangkat Daerah',
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Ekspor PDF',
+                    title: 'Perangkat Daerah',
+                }
+            ]
+        }).container().appendTo($('#buttons_cetak'));
+
         table.on('xhr.dt', function (e, settings, json, xhr) {
             token = json.<?= csrf_token() ?>;
         });
     });
+
 
     function reload_table() {
         table.DataTable().ajax.reload(null, true);
