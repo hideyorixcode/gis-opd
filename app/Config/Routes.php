@@ -55,7 +55,9 @@ $routes->group('dashboard', ['filter' => 'ceklogin'], function ($routes) {
 
     $routes->group('opd', ['filter' => 'cekloginAdmin'], function ($routes) {
         $routes->get('/', 'OpdController::index');
+        $routes->get('cetak', 'OpdController::cetak');
         $routes->post('read', 'OpdController::read');
+        $routes->post('read-cetak', 'OpdController::read_cetak');
         $routes->get('form', 'OpdController::form');
         $routes->post('create', 'OpdController::create');
         $routes->get('edit/(:any)', 'OpdController::edit/$1');
@@ -67,6 +69,8 @@ $routes->group('dashboard', ['filter' => 'ceklogin'], function ($routes) {
 
     $routes->group('uptd-cabdin', ['filter' => 'cekloginAdmin'], function ($routes) {
         $routes->get('/', 'UptdController::index');
+        $routes->get('cetak', 'UptdController::cetak');
+        $routes->post('read-cetak', 'UptdController::read_cetak');
         $routes->post('read', 'UptdController::read');
         $routes->get('form', 'UptdController::form');
         $routes->post('create', 'UptdController::create');
@@ -79,6 +83,8 @@ $routes->group('dashboard', ['filter' => 'ceklogin'], function ($routes) {
     $routes->group('rekap', ['filter' => 'cekloginAdmin'], function ($routes) {
         $routes->get('/', 'RekapController::index');
         $routes->post('read', 'RekapController::read');
+        $routes->get('cetak', 'RekapController::cetak');
+        $routes->post('read-cetak', 'RekapController::read_cetak');
     });
 
     $routes->group('pengguna', ['filter' => 'cekloginAdmin'], function ($routes) {

@@ -40,40 +40,47 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="form-group row">
-                            <label class="col-4 col-form-label">Kabupaten/Kota</label>
-                            <div class="col-7">
-                                <select class="form-control" data-toggle="select2" id="kabupaten_kota"
-                                        name="kabupaten_kota">
-                                    <option value="all">Seluruh Kab/Kota</option>
-                                    <option value="">Alamat Kosong</option>
-                                    <option value="kota bandar lampung">Kota Bandar Lampung</option>
-                                    <option value="kota metro">Kota Metro</option>
-                                    <option value="kabupaten lampung barat">Kab. Lampung Barat</option>
-                                    <option value="kabupaten lampung selatan">Kab. Lampung Selatan</option>
-                                    <option value="kabupaten lampung tengah">Kab. Lampung Tengah</option>
-                                    <option value="kabupaten lampung timur">Kab. Lampung Timur</option>
-                                    <option value="kabupaten lampung utara">Kab. Lampung Utara</option>
-                                    <option value="kabupaten mesuji">Kab. Mesuji</option>
-                                    <option value="kabupaten pesawaran">Kab. Pesawaran</option>
-                                    <option value="kabupaten pesisir barat">Kab. Pesisir Barat</option>
-                                    <option value="kabupaten pringsewu">Kab. Pringsewu</option>
-                                    <option value="kabupaten tanggamus">Kab. Tanggamus</option>
-                                    <option value="kabupaten tulang bawang">Kab. Tulang Bawang</option>
-                                    <option value="kabupaten tulang bawang barat">Kab. Tulang Bawang Barat</option>
-                                    <option value="kabupaten way kanan">Kab. Way Kanan</option>
-                                </select>
+                        <form id="cetak" name="cetak" method="get" action="<?= base_url('dashboard/opd/cetak') ?>"
+                              target="_blank">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Kabupaten/Kota</label>
+                                <div class="col-7">
+                                    <select class="form-control" data-toggle="select2" id="kabupaten_kota"
+                                            name="kabupaten_kota">
+                                        <option value="all">Seluruh Kab/Kota</option>
+                                        <option value="">Alamat Kosong</option>
+                                        <option value="kota bandar lampung">Kota Bandar Lampung</option>
+                                        <option value="kota metro">Kota Metro</option>
+                                        <option value="kabupaten lampung barat">Kab. Lampung Barat</option>
+                                        <option value="kabupaten lampung selatan">Kab. Lampung Selatan</option>
+                                        <option value="kabupaten lampung tengah">Kab. Lampung Tengah</option>
+                                        <option value="kabupaten lampung timur">Kab. Lampung Timur</option>
+                                        <option value="kabupaten lampung utara">Kab. Lampung Utara</option>
+                                        <option value="kabupaten mesuji">Kab. Mesuji</option>
+                                        <option value="kabupaten pesawaran">Kab. Pesawaran</option>
+                                        <option value="kabupaten pesisir barat">Kab. Pesisir Barat</option>
+                                        <option value="kabupaten pringsewu">Kab. Pringsewu</option>
+                                        <option value="kabupaten tanggamus">Kab. Tanggamus</option>
+                                        <option value="kabupaten tulang bawang">Kab. Tulang Bawang</option>
+                                        <option value="kabupaten tulang bawang barat">Kab. Tulang Bawang Barat</option>
+                                        <option value="kabupaten way kanan">Kab. Way Kanan</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <div class="col-8 offset-4">
-                                <button type="button" class="btn btn-primary waves-effect waves-light"
-                                        onclick="reload_table();">
-                                    <i class="mdi mdi-refresh-circle"></i> Filter Data
-                                </button>
+                            <div class="form-group row">
+                                <div class="col-8 offset-4">
+                                    <button type="button" class="btn btn-primary waves-effect waves-light"
+                                            onclick="reload_table();">
+                                        <i class="mdi mdi-refresh-circle"></i> Filter Data
+                                    </button>
+                                    <button type="submit" class="btn btn-secondary waves-effect waves-light">
+                                        <i class="mdi mdi-printer"></i> Cetak
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+
+                        </form>
 
                     </div>
                 </div>
@@ -208,9 +215,10 @@
     }
 
     function delete_opd(id) {
-        var data_token = {<?= csrf_token() ?>:
-        token
-    }
+        var data_token = {
+            <?= csrf_token() ?>:
+            token
+        }
 
         Swal.fire({
             title: 'Apakah anda ingin menghapus data ini',

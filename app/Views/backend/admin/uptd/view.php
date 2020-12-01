@@ -27,13 +27,6 @@
                     </div>
                     <h4 class="page-title"><?= ucfirst($judul) ?></h4>
                     <br/>
-
-                    <!--                    <div class="text-right mb-4">-->
-                    <!--                        <a class="btn btn-primary waves-effect waves-light text-white"-->
-                    <!--                           href="--><? //= base_url('dashboard/uptd-cabdin/form') ?><!--">-->
-                    <!--                            <i class="mdi mdi-plus-box-multiple"></i> Tambah UPTD / CABDIN / GEDUNG-->
-                    <!--                        </a>-->
-                    <!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -42,65 +35,72 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="form-group row">
-                            <label class="col-4 col-form-label">OPD</label>
-                            <div class="col-7">
-                                <select class="form-control" data-toggle="select2" id="id_unker_opd"
-                                        name="id_unker_opd">
-                                    <option value="">Seluruh OPD</option>
-                                    <?php foreach ($dataOPD as $opd) : ?>
-                                        <option value="<?= substr($opd['id_unker'], 0, 6) ?>"><?= $opd['nama_unker'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
+                        <form id="cetak" name="cetak" method="get" action="<?= base_url('dashboard/uptd-cabdin/cetak') ?>"
+                              target="_blank">
 
-                        <div class="form-group row">
-                            <label class="col-4 col-form-label">Status</label>
-                            <div class="col-7">
-                                <select class="form-control" id="statusPost" name="statusPost">
-                                    <option value="">Seluruh Status</option>
-                                    <option value="UPTD">UPTD</option>
-                                    <option value="CABDIN">Cabang Dinas</option>
-                                    <option value="GEDUNG">Gedung/Aset</option>
-                                </select>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">OPD</label>
+                                <div class="col-7">
+                                    <select class="form-control" data-toggle="select2" id="id_unker_opd"
+                                            name="id_unker_opd">
+                                        <option value="">Seluruh OPD</option>
+                                        <?php foreach ($dataOPD as $opd) : ?>
+                                            <option value="<?= substr($opd['id_unker'], 0, 6).'|'.$opd['nama_unker'] ?>"><?= $opd['nama_unker'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label class="col-4 col-form-label">Kabupaten/Kota</label>
-                            <div class="col-7">
-                                <select class="form-control" data-toggle="select2" id="kabupaten_kota"
-                                        name="kabupaten_kota">
-                                    <option value="all">Seluruh Kab/Kota</option>
-                                    <option value="">Alamat Kosong</option>
-                                    <option value="kota bandar lampung">Kota Bandar Lampung</option>
-                                    <option value="kota metro">Kota Metro</option>
-                                    <option value="kabupaten lampung barat">Kab. Lampung Barat</option>
-                                    <option value="kabupaten lampung selatan">Kab. Lampung Selatan</option>
-                                    <option value="kabupaten lampung tengah">Kab. Lampung Tengah</option>
-                                    <option value="kabupaten lampung timur">Kab. Lampung Timur</option>
-                                    <option value="kabupaten lampung utara">Kab. Lampung Utara</option>
-                                    <option value="kabupaten mesuji">Kab. Mesuji</option>
-                                    <option value="kabupaten pesawaran">Kab. Pesawaran</option>
-                                    <option value="kabupaten pesisir barat">Kab. Pesisir Barat</option>
-                                    <option value="kabupaten pringsewu">Kab. Pringsewu</option>
-                                    <option value="kabupaten tanggamus">Kab. Tanggamus</option>
-                                    <option value="kabupaten tulang bawang">Kab. Tulang Bawang</option>
-                                    <option value="kabupaten tulang bawang barat">Kab. Tulang Bawang Barat</option>
-                                    <option value="kabupaten way kanan">Kab. Way Kanan</option>
-                                </select>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Status</label>
+                                <div class="col-7">
+                                    <select class="form-control" id="statusPost" name="statusPost">
+                                        <option value="">Seluruh Status</option>
+                                        <option value="UPTD">UPTD</option>
+                                        <option value="CABDIN">Cabang Dinas</option>
+                                        <option value="GEDUNG">Gedung/Aset</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <div class="col-8 offset-4">
-                                <button type="button" class="btn btn-primary waves-effect waves-light"
-                                        onclick="reload_table();">
-                                    <i class="mdi mdi-refresh-circle"></i> Filter Data
-                                </button>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Kabupaten/Kota</label>
+                                <div class="col-7">
+                                    <select class="form-control" data-toggle="select2" id="kabupaten_kota"
+                                            name="kabupaten_kota">
+                                        <option value="all">Seluruh Kab/Kota</option>
+                                        <option value="">Alamat Kosong</option>
+                                        <option value="kota bandar lampung">Kota Bandar Lampung</option>
+                                        <option value="kota metro">Kota Metro</option>
+                                        <option value="kabupaten lampung barat">Kab. Lampung Barat</option>
+                                        <option value="kabupaten lampung selatan">Kab. Lampung Selatan</option>
+                                        <option value="kabupaten lampung tengah">Kab. Lampung Tengah</option>
+                                        <option value="kabupaten lampung timur">Kab. Lampung Timur</option>
+                                        <option value="kabupaten lampung utara">Kab. Lampung Utara</option>
+                                        <option value="kabupaten mesuji">Kab. Mesuji</option>
+                                        <option value="kabupaten pesawaran">Kab. Pesawaran</option>
+                                        <option value="kabupaten pesisir barat">Kab. Pesisir Barat</option>
+                                        <option value="kabupaten pringsewu">Kab. Pringsewu</option>
+                                        <option value="kabupaten tanggamus">Kab. Tanggamus</option>
+                                        <option value="kabupaten tulang bawang">Kab. Tulang Bawang</option>
+                                        <option value="kabupaten tulang bawang barat">Kab. Tulang Bawang Barat</option>
+                                        <option value="kabupaten way kanan">Kab. Way Kanan</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="form-group row">
+                                <div class="col-8 offset-4">
+                                    <button type="button" class="btn btn-primary waves-effect waves-light"
+                                            onclick="reload_table();">
+                                        <i class="mdi mdi-refresh-circle"></i> Filter Data
+                                    </button>
+                                    <button type="submit" class="btn btn-secondary waves-effect waves-light">
+                                        <i class="mdi mdi-printer"></i> Cetak
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
 
                     </div>
                 </div>
@@ -186,8 +186,9 @@
                     "type": "POST",
                     data: function (d) {
                         d.<?= csrf_token() ?> = token;
+                        var id_unker_opd = $('#id_unker_opd').val().split('|');
                         d.statusPost = $('#statusPost').val();
-                        d.id_unker_opd = $('#id_unker_opd').val();
+                        d.id_unker_opd = id_unker_opd[0];
                         d.kabupaten_kota = $('#kabupaten_kota').val();
                         // d.verifikasi = $('#verifikasi').val();
                         // d.id_lab = $('#id_lab').val();
@@ -241,9 +242,10 @@
     }
 
     function delete_uptd(id) {
-        var data_token = {<?= csrf_token() ?>:
-        token
-    }
+        var data_token = {
+            <?= csrf_token() ?>:
+            token
+        }
 
         Swal.fire({
             title: 'Apakah anda ingin menghapus data ini',

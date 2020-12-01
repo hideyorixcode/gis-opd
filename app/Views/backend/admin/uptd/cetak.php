@@ -26,6 +26,7 @@
                         </ol>
                     </div>
                     <h4 class="page-title"><?= ucfirst($judul) ?></h4>
+                    <br/>
                 </div>
             </div>
         </div>
@@ -34,59 +35,39 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form id="cetak" name="cetak" method="get" action="<?= base_url('dashboard/rekap/cetak') ?>"
-                              target="_blank">
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">Status</label>
-                                <div class="col-7">
-                                    <select class="form-control" id="statusPost" name="statusPost">
-                                        <option value="">Seluruh Status</option>
-                                        <option value="OPD">OPD</option>
-                                        <option value="UPTD">UPTD</option>
-                                        <option value="CABDIN">Cabang Dinas</option>
-                                        <option value="GEDUNG">Gedung/Aset</option>
-                                    </select>
-                                </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">OPD</label>
+                            <div class="col-7">
+                                <input type="hidden" class="form-control" name="id_unker_opd" id="id_unker_opd"
+                                       readonly value="<?= ($id_unker_opd); ?>">
+                                <input type="text" class="form-control" name="nama_unker" id="nama_unker"
+                                       readonly value="<?= ($unker_opd); ?>">
                             </div>
+                        </div>
 
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">Kabupaten/Kota</label>
-                                <div class="col-7">
-                                    <select class="form-control" data-toggle="select2" id="kabupaten_kota"
-                                            name="kabupaten_kota">
-                                        <option value="all">Seluruh Kab/Kota</option>
-                                        <option value="">Alamat Kosong</option>
-                                        <option value="kota bandar lampung">Kota Bandar Lampung</option>
-                                        <option value="kota metro">Kota Metro</option>
-                                        <option value="kabupaten lampung barat">Kab. Lampung Barat</option>
-                                        <option value="kabupaten lampung selatan">Kab. Lampung Selatan</option>
-                                        <option value="kabupaten lampung tengah">Kab. Lampung Tengah</option>
-                                        <option value="kabupaten lampung timur">Kab. Lampung Timur</option>
-                                        <option value="kabupaten lampung utara">Kab. Lampung Utara</option>
-                                        <option value="kabupaten mesuji">Kab. Mesuji</option>
-                                        <option value="kabupaten pesawaran">Kab. Pesawaran</option>
-                                        <option value="kabupaten pesisir barat">Kab. Pesisir Barat</option>
-                                        <option value="kabupaten pringsewu">Kab. Pringsewu</option>
-                                        <option value="kabupaten tanggamus">Kab. Tanggamus</option>
-                                        <option value="kabupaten tulang bawang">Kab. Tulang Bawang</option>
-                                        <option value="kabupaten tulang bawang barat">Kab. Tulang Bawang Barat</option>
-                                        <option value="kabupaten way kanan">Kab. Way Kanan</option>
-                                    </select>
-                                </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Status</label>
+                            <div class="col-7">
+                                <input type="text" class="form-control" name="statusPost" id="statusPost"
+                                       readonly value="<?= ($statusPost); ?>">
                             </div>
+                        </div>
 
-                            <div class="form-group row">
-                                <div class="col-8 offset-4">
-                                    <button type="button" class="btn btn-primary waves-effect waves-light"
-                                            onclick="reload_table();">
-                                        <i class="mdi mdi-refresh-circle"></i> Filter Data
-                                    </button>
-                                    <button type="submit" class="btn btn-secondary waves-effect waves-light">
-                                        <i class="mdi mdi-printer"></i> Cetak
-                                    </button>
-                                </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Kabupaten/Kota</label>
+                            <div class="col-7">
+                                <input type="text" class="form-control" name="kabupaten_kota" id="kabupaten_kota"
+                                       readonly value="<?= ($kabupaten_kota); ?>">
                             </div>
-                        </form>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-8 offset-4">
+                                <a href="javascript:window.print()"
+                                   class="btn btn-primary waves-effect waves-light d-print-none"><i
+                                            class="mdi mdi-printer mr-1"></i> Print</a>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -94,14 +75,6 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <?php if (!empty(session()->getFlashdata('sukses'))) { ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        <strong>Sukses!</strong> <?= session()->getFlashdata('sukses'); ?>
-                    </div>
-                <?php } ?>
                 <div class="card">
 
                     <div class="card-body">
@@ -109,13 +82,9 @@
                             <thead>
                             <tr>
                                 <th class="all">#</th>
-                                <th class="all">Nama Perangkat Daerah</th>
-                                <th>Nama Pejabat</th>
+                                <th class="all">Nama UPTD / CABDIN / GEDUNG</th>
                                 <th>Alamat</th>
                                 <th>Status</th>
-                                <th class="none">No Telp.</th>
-                                <th class="none">Email</th>
-                                <th class="none">Website</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -160,17 +129,24 @@
                 "pageLength": 25,
                 fixedHeader: true,
                 responsive: true,
-                "aLengthMenu": [
-                    [10, 25, 50, 100, -1],
-                    [10, 25, 50, 100, "Semua"]
-                ],
+                "ordering": false,
+                "searching": false,
+                "lengthChange": false,
+                "paging": false,
+                "info": false,
+                "pageLength": -1,
+                // "aLengthMenu": [
+                //     [10, 25, 50, 100, -1],
+                //     [10, 25, 50, 100, "Semua"]
+                // ],
                 "order": [],
                 "ajax": {
-                    "url": "<?= base_url('dashboard/rekap/read/'); ?>",
+                    "url": "<?= base_url('dashboard/uptd-cabdin/read-cetak/'); ?>",
                     "type": "POST",
                     data: function (d) {
                         d.<?= csrf_token() ?> = token;
                         d.statusPost = $('#statusPost').val();
+                        d.id_unker_opd = $('#id_unker_opd').val();
                         d.kabupaten_kota = $('#kabupaten_kota').val();
                         // d.verifikasi = $('#verifikasi').val();
                         // d.id_lab = $('#id_lab').val();
@@ -188,15 +164,14 @@
                         orderable: false,
                         className: 'control',
                     },
-
                     {
                         "className": "dt-center",
-                        "targets": [0, 8]
+                        "targets": [0, 3]
                     },
-                    {
-                        "orderable": false,
-                        "targets": [0, 8]
-                    },
+                    // {
+                    //     "orderable": false,
+                    //     "targets": [0, 9, 10]
+                    // },
                 ],
                 language: {
                     "searchPlaceholder": "Cari...",
@@ -213,6 +188,9 @@
                 "drawCallback": function (settings) {
                     console.log(settings.json);
                     $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+                },
+                "initComplete": function (settings, json) {
+                    window.print();
                 },
             });
         table.on('xhr.dt', function (e, settings, json, xhr) {

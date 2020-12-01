@@ -55,6 +55,45 @@ class OpdController extends BaseController
 
     }
 
+    public function cetak()
+    {
+        $kabupaten_kota = $this->request->getGet('kabupaten_kota');
+        $data = [
+            'judul' => 'Cetak OPD ',
+            'kab_kota' => $kabupaten_kota
+        ];
+        $data = array_merge($this->dataGlobal, $this->dataController, $data);
+        return view('backend/admin/opd/cetak', $data);
+    }
+
+    public function read_cetak()
+    {
+        $mopd = $this->mpengguna;
+        if ($this->reqService->getMethod(true) == 'POST') {
+            $lists = $mopd->get_datatables_opd();
+            $data = [];
+            $no = $this->reqService->getPost("start");
+            foreach ($lists as $list) {
+                $no++;
+                $row = [];
+                $row[] = $no;
+                $row[] = $list->nama_unker;
+                $row[] = $list->alamat;
+                $row[] = '';
+
+                $data[] = $row;
+            }
+            $output = ["draw" => $this->reqService->getPost('draw'),
+                "recordsTotal" => $mopd->count_all_opd(),
+                "recordsFiltered" => $mopd->count_filtered_opd(),
+                "data" => $data];
+            $output[csrf_token()] = csrf_hash();
+            echo json_encode($output);
+        }
+
+
+    }
+
     public function form()
     {
 
@@ -73,7 +112,7 @@ class OpdController extends BaseController
         $db = db_connect();
         $query_get_id = $db->query("SELECT SUBSTRING(id_unker, 1, 6) AS id_unker FROM unitkerja ORDER BY SUBSTRING(id_unker, 1, 6) DESC LIMIT 1");
         $dataId = $query_get_id->getRow();
-        $getIDUnker = ($dataId->id_unker+1).'0000';
+        $getIDUnker = ($dataId->id_unker + 1) . '0000';
         //die();
         //1014010000
         //1014020000
@@ -111,14 +150,14 @@ class OpdController extends BaseController
 
         if ($singkatan_unker) {
 
-                $rules += [
-                    'singkatan_unker' => [
-                        'rules' => 'is_unique[unitkerja.singkatan_unker]',
-                        'errors' => [
-                            'is_unique' => 'Singkatan OPD telah digunakan'
-                        ]
-                    ],
-                ];
+            $rules += [
+                'singkatan_unker' => [
+                    'rules' => 'is_unique[unitkerja.singkatan_unker]',
+                    'errors' => [
+                        'is_unique' => 'Singkatan OPD telah digunakan'
+                    ]
+                ],
+            ];
 
         }
 
@@ -252,17 +291,17 @@ class OpdController extends BaseController
         $username_lama = $dataMaster['username'];
 
         $rules = [];
-        
-         $rules += [
-                'logo' => [
-                    'rules' => 'ext_in[logo,png,jpg,gif,JPG,jpeg,JPEG]|max_size[logo,1024]',
-                    'errors' => [
-                        'ext_in' => 'Tipe File Berupa Gambar',
-                        'max_size' => 'Ukuran Maksimal logo / Foto 1 MB',
-                    ]
-                ],
-            ];
-        
+
+        $rules += [
+            'logo' => [
+                'rules' => 'ext_in[logo,png,jpg,gif,JPG,jpeg,JPEG]|max_size[logo,1024]',
+                'errors' => [
+                    'ext_in' => 'Tipe File Berupa Gambar',
+                    'max_size' => 'Ukuran Maksimal logo / Foto 1 MB',
+                ]
+            ],
+        ];
+
         if ($no_telepon) {
             $rules += [
                 'no_telepon' => [

@@ -57,6 +57,59 @@ class UptdController extends BaseController
 
     }
 
+    public function cetak()
+    {
+        $kabupaten_kota = $this->request->getGet('kabupaten_kota');
+        $statusPost = $this->request->getGet('statusPost');
+        if ($this->request->getGet('id_unker_opd') != '') {
+            $explode = explode('|', $this->request->getGet('id_unker_opd'));
+            $id_unker_opd = $explode[0];
+            $unker_opd = $explode[1];
+        } else {
+            $id_unker_opd = '';
+            $unker_opd = '';
+        }
+
+        $data = [
+            'judul' => 'Cetak UPTD/CABDIN/GEDUNG',
+            'kabupaten_kota' => $kabupaten_kota,
+            'statusPost' => $statusPost,
+            'id_unker_opd' => $id_unker_opd,
+            'unker_opd' => $unker_opd,
+        ];
+        $data = array_merge($this->dataGlobal, $this->dataController, $data);
+        return view('backend/admin/uptd/cetak', $data);
+    }
+
+    public function read_cetak()
+    {
+        $muptd = $this->mpengguna;
+        if ($this->reqService->getMethod(true) == 'POST') {
+            $lists = $muptd->get_datatables_uptd();
+            $data = [];
+            $no = $this->reqService->getPost("start");
+            foreach ($lists as $list) {
+                $no++;
+                $row = [];
+                $row[] = $no;
+                $row[] = $list->nama_unker;
+                $row[] = $list->alamat;
+                $row[] = $list->status;
+                $row[] = '';
+
+                $data[] = $row;
+            }
+            $output = ["draw" => $this->reqService->getPost('draw'),
+                "recordsTotal" => $muptd->count_all_uptd(),
+                "recordsFiltered" => $muptd->count_filtered_uptd(),
+                "data" => $data];
+            $output[csrf_token()] = csrf_hash();
+            echo json_encode($output);
+        }
+
+
+    }
+
     public function form()
     {
         $data = [
@@ -75,7 +128,7 @@ class UptdController extends BaseController
         $selectOPD = $this->request->getPost('selectOPD');
         $query_get_id = $db->query("SELECT SUBSTRING(id_unker, 7, 4) AS id_unker FROM unitkerja WHERE SUBSTRING(id_unker, 1, 6) = '$selectOPD'  ORDER BY SUBSTRING(id_unker, 7, 4) DESC LIMIT 1");
         $dataId = $query_get_id->getRow();
-        $getIDUnker = ($selectOPD.''.$dataId->id_unker)+1;
+        $getIDUnker = ($selectOPD . '' . $dataId->id_unker) + 1;
 
         // $id_unker_mix = $this->request->getPost('id_unker_mix');
         $id_unker_mix = $getIDUnker;
@@ -228,15 +281,12 @@ class UptdController extends BaseController
         $db = db_connect();
 
         $selectOPD = $this->request->getPost('selectOPD');
-        if($selectOPD!=substr($id_unker_lama, 0, 6))
-        {
+        if ($selectOPD != substr($id_unker_lama, 0, 6)) {
             $query_get_id = $db->query("SELECT SUBSTRING(id_unker, 7, 4) AS id_unker FROM unitkerja WHERE SUBSTRING(id_unker, 1, 6) = '$selectOPD'  ORDER BY SUBSTRING(id_unker, 7, 4) DESC LIMIT 1");
             $dataId = $query_get_id->getRow();
-            $getIDUnker = ($selectOPD.''.$dataId->id_unker)+1;
+            $getIDUnker = ($selectOPD . '' . $dataId->id_unker) + 1;
             $id_unker_mix = $getIDUnker;
-        }
-        else
-        {
+        } else {
             $id_unker_mix = $dataMaster['id_unker'];
         }
         //$id_unker_mix = $this->request->getPost('id_unker_mix');
@@ -256,18 +306,17 @@ class UptdController extends BaseController
         $active = 1;
 
 
-
         $rules = [];
-        
+
         $rules += [
-                'logo' => [
-                    'rules' => 'ext_in[logo,png,jpg,gif,JPG,jpeg,JPEG]|max_size[logo,1024]',
-                    'errors' => [
-                        'ext_in' => 'Tipe File Berupa Gambar',
-                        'max_size' => 'Ukuran Maksimal logo / Foto 1 MB',
-                    ]
-                ],
-            ];
+            'logo' => [
+                'rules' => 'ext_in[logo,png,jpg,gif,JPG,jpeg,JPEG]|max_size[logo,1024]',
+                'errors' => [
+                    'ext_in' => 'Tipe File Berupa Gambar',
+                    'max_size' => 'Ukuran Maksimal logo / Foto 1 MB',
+                ]
+            ],
+        ];
 
         if ($no_telepon) {
             $rules += [
