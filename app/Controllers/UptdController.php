@@ -33,7 +33,8 @@ class UptdController extends BaseController
                 $row[] = $no;
                 $row[] = $list->nama_unker;
                 $row[] = $list->username;
-                $row[] = $list->nama_pejabat;
+                $nama_opd = $this->mpengguna->select('nama_unker')->like('id_unker', substr($list->id_unker, 0, 6))->first()['nama_unker'];
+                $row[] = $nama_opd;
                 $row[] = $list->alamat;
                 $row[] = $list->status;
                 $row[] = $list->no_telepon;

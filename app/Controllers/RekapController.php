@@ -31,7 +31,13 @@ class RekapController extends BaseController
                 $row = [];
                 $row[] = $no;
                 $row[] = $list->nama_unker;
-                $row[] = $list->nama_pejabat;
+                if ($list->status == 'OPD') {
+                    $row[] = '';
+                } else {
+                    $nama_opd = $this->mpengguna->select('nama_unker')->like('id_unker', substr($list->id_unker, 0, 6))->first()['nama_unker'];
+                    $row[] = $nama_opd;
+                }
+
                 $row[] = $list->alamat;
                 $row[] = $list->status;
                 $row[] = $list->no_telepon;
@@ -77,6 +83,12 @@ class RekapController extends BaseController
                 $row = [];
                 $row[] = $no;
                 $row[] = $list->nama_unker;
+                if ($list->status == 'OPD') {
+                    $row[] = '';
+                } else {
+                    $nama_opd = $this->mpengguna->select('nama_unker')->like('id_unker', substr($list->id_unker, 0, 6))->first()['nama_unker'];
+                    $row[] = $nama_opd;
+                }
                 $row[] = $list->alamat;
                 $row[] = $list->status;
                 $row[] = '';

@@ -110,7 +110,7 @@
                             <tr>
                                 <th class="all">#</th>
                                 <th class="all">Nama Perangkat Daerah</th>
-                                <th>Nama Pejabat</th>
+                                <th></th>
                                 <th>Alamat</th>
                                 <th>Status</th>
                                 <th class="none">No Telp.</th>

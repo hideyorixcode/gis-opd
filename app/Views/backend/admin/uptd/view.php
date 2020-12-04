@@ -125,7 +125,7 @@
                                 <th class="all">#</th>
                                 <th class="all">Nama UPTD / CABDIN / GEDUNG</th>
                                 <th class="none">Username</th>
-                                <th>Nama Pejabat</th>
+                                <th>Nama OPD</th>
                                 <th>Alamat</th>
                                 <th>Status</th>
                                 <th class="none">No Telp.</th>
